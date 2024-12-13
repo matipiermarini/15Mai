@@ -1,0 +1,67 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="mb-4">¡Mis 15 Mailen!</h1>
+    <div class="row">
+        <div class="col-md-6 col-lg-3 mb-4">
+            <img src="{% static 'invitacion/imagenes/img1.jpg' %}" class="img-fluid rounded" alt="Imagen 1">
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <img src="{% static 'invitacion/imagenes/img2.jpg' %}" class="img-fluid rounded" alt="Imagen 2">
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <img src="{% static 'invitacion/imagenes/img3.jpg' %}" class="img-fluid rounded" alt="Imagen 3">
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <img src="{% static 'invitacion/imagenes/img4.jpg' %}" class="img-fluid rounded" alt="Imagen 4">
+        </div>
+    </div>
+</div>
+
+
+<div id="countdown" class="mt-5">
+    <h2>Faltan:</h2>
+    <p id="countdown-timer" class="display-4"></p>
+</div>
+
+<script>
+    const eventDate = new Date('June 7, 2025 21:00:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const difference = eventDate - now;
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown-timer").innerHTML = `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+    }
+
+    setInterval(updateCountdown, 1000);
+</script>
+
+<div id="map"></div>
+<script>
+    function initMap() {
+        const location = { lat: -32.611411, lng: -62.696933 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15,
+            center: location,
+        });
+        const marker = new google.maps.Marker({
+            position: location,
+            map: map,
+        });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0GjyldUgl6d8pWTLtYxwmEPjduJOhMsQ&callback=initMap" async defer></script>
+{% endblock %}
